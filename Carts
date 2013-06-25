@@ -1,0 +1,90 @@
+Ti.UI.setBackgroundColor('#000');
+
+var cartWindow = Ti.UI.createWindow({
+  title:"carter",
+	backgroundColor:"#e00",
+	tabBarHidden:false,
+	navBarHidden:false
+});
+
+var addNewRow = Ti.UI.createButton({
+	title:"+",
+	left:5,
+	top:2,
+	height:25,
+	width:40
+});
+
+var delRow = Ti.UI.createButton({
+	title:"-",
+	left:50,
+	top:2,
+	height:25,
+	width:40
+});
+
+var items = [];
+
+for (var i=0; i<10; i++){
+	var itemRow = Ti.UI.createTableViewRow({
+		height:"auto"
+	});
+	var txtF1 = Ti.UI.createTextField({
+	top:2,
+	left:5,
+	height:30,
+	width:110,
+	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	keyboardType:Ti.UI.KEYBOARD_DEFAULT,
+	hintText:"Item Name"
+	});
+
+	var txtF2 = Ti.UI.createTextField({
+		top:2,
+		left:120,
+		height:30,
+		width:60,
+		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+		keyboardType:Ti.UI.KEYBOARD_DECIMAL_PAD,
+		hintText:"Qty"
+	}); 
+	
+	var txtF3 = Ti.UI.createTextField({
+		top:2,
+		left:190,
+		height:30,
+		width:60,
+		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+		keyboardType:Ti.UI.KEYBOARD_DECIMAL_PAD,
+		hintText:"Cost"
+	}); 
+	
+	itemRow.add(txtF1);
+	itemRow.add(txtF2);
+	itemRow.add(txtF3);
+	items.push(itemRow);
+}
+
+var itemsTable = Ti.UI.createTableView({
+	top:40,
+	data:items,
+	editable:true
+})
+
+itemsTable.addEventListener("click", function(e){
+	txtF1.blur();
+	txtF2.blur();
+	txtF3.blur();
+});
+
+addNewRow.addEventListener("click", function(e){
+	
+	var newTableRows = Ti.UI.createTableView({
+		data:items
+	})
+})
+
+cartWindow.add(addNewRow);
+cartWindow.add(delRow);
+cartWindow.add(itemsTable);
+cartWindow.open();
